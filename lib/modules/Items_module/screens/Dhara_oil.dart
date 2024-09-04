@@ -1,7 +1,4 @@
 // ignore_for_file: prefer_final_fields, non_constant_identifier_names
-
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mishop_app/modules/cart_module/screens/cart.dart';
@@ -414,13 +411,15 @@ class _DharaOilState extends State<DharaOil> {
     return Padding(
       padding: const EdgeInsets.fromLTRB(15,0,15,10),
       child: GestureDetector(
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>  CartScreen(),
-              ));
-        },
+  
+    onTap: () {
+       Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CartScreen(itemContent: itemContent),
+            ),
+          );
+    },
         child: Container(
             height: 60,
             
