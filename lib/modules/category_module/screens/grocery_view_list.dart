@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mishop_app/modules/Items_module/screens/Dhara_oil.dart';
+import 'package:mishop_app/modules/Items_module/screens/items_content.dart';
 import 'package:mishop_app/modules/Items_module/screens/mountain_dew.dart';
 import 'package:mishop_app/modules/category_module/screens/grocery_view_grid.dart';
 
@@ -23,7 +23,7 @@ class _GroceryView2State extends State<GroceryView2> {
       'ratings': '4.8',
       'reviews': '(230)',
       'isFavorite': 'false',
-      'path': DharaOil(),
+      // 'path': DharaOil(),
     },
     {
       'images': 'assets/images/40015868-9_2-mountain-dew-soft-drink 1.png',
@@ -35,7 +35,7 @@ class _GroceryView2State extends State<GroceryView2> {
       'ratings': '4.5',
       'reviews': '(123)',
       'isFavorite': 'false',
-      'path': MountainDew(),
+      // 'path': MountainDew(),
     },
     {
       'images': 'assets/images/61pPVRyfmgL 1.jpg',
@@ -47,7 +47,7 @@ class _GroceryView2State extends State<GroceryView2> {
       'ratings': '4.9',
       'reviews': '(123)',
       'isFavorite': 'false',
-      'path': MountainDew(),
+      // 'path': MountainDew(),
     }
   ];
   
@@ -243,13 +243,13 @@ class _GroceryView2State extends State<GroceryView2> {
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {
-                  final path = listMap[index]['path'];
-                  if (path != -1) {
+                
+           
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => path),
+                      MaterialPageRoute(builder: (context) => ItemsContent(item: listMap)),
                     );
-                  }
+                  
                 },
                 child: ListTile(
                     leading: Image.asset(listMap[index]['images']),

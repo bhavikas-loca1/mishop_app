@@ -1,31 +1,30 @@
-// ignore_for_file: prefer_final_fields, non_constant_identifier_names
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mishop_app/modules/cart_module/screens/cart.dart';
 
-// import 'package:flutter/src/rendering/box.dart';
-class DharaOil extends StatefulWidget {
-  const DharaOil({super.key});
+class ItemsContent extends StatefulWidget {
+   final List<Map<String, dynamic>> item ;
+
+  ItemsContent({required this.item});
 
   @override
-  State<DharaOil> createState() => _DharaOilState();
+  State<ItemsContent> createState() => _ItemsContentState();
 }
 
-class _DharaOilState extends State<DharaOil> {
-  List<Map<String, dynamic>> itemContent = [
-    {
-      'image_1': 'assets/images/134006_6-dhara-oil-groundnut 1.png',
-      'category': 'Grocery',
-      'name': 'Dhara Groundnut Refined Cooking Oil 5L',
-      'new_cost': 'Rs 103 ',
-      'old_cost': ' Rs 133 ',
-      'ratings': '4.8',
-      'reviews': '(230)',
-      'quantity': '5L',
-    }
-  ];
-
-  List<String> _comments = [];
+class _ItemsContentState extends State<ItemsContent> {
+  // List<Map<String, dynamic>> itemContent = [
+  //   {
+  //     'image_1': 'assets/images/134006_6-dhara-oil-groundnut 1.png',
+  //     'category': 'Grocery',
+  //     'name': 'Dhara Groundnut Refined Cooking Oil 5L',
+  //     'new_cost': 'Rs 103 ',
+  //     'old_cost': ' Rs 133 ',
+  //     'ratings': '4.8',
+  //     'reviews': '(230)',
+  //     'quantity': '5L',
+  //   }
+  // ];
+    List<String> _comments = [];
   void _addComments(String val) {
     if (val.trim().isNotEmpty) {
       setState(() {
@@ -49,10 +48,7 @@ class _DharaOilState extends State<DharaOil> {
   }
 
   TextEditingController _commentController = TextEditingController();
-
-
-
-  Widget _buildCommentList() {
+   Widget _buildCommentList() {
     return ListView.builder(
       shrinkWrap: true,
       itemCount: _comments.length,
@@ -73,7 +69,6 @@ class _DharaOilState extends State<DharaOil> {
   Widget _buildCommentItem(String comment) {
     return ListTile(title: Text(comment));
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,7 +112,7 @@ class _DharaOilState extends State<DharaOil> {
                         width: 170,
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                          image: AssetImage(itemContent[index]['image_1']),
+                          image: AssetImage(widget.item[index]['images']),
                           fit: BoxFit.fitHeight,
                         )),
                       ),
@@ -161,12 +156,12 @@ class _DharaOilState extends State<DharaOil> {
                 
                 children: [
                   Text(
-                    itemContent[index]['category'],
+                    widget.item[index]['category'],
                     style:
                         const TextStyle(fontSize: 14, color: Color(0xff39C7A5)),
                   ),
                   Text(
-                    itemContent[index]['name'],
+                    widget.item[index]['title'],
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 18),
                   ),
@@ -182,12 +177,12 @@ class _DharaOilState extends State<DharaOil> {
                         Row(
                           children: [
                             Text(
-                              itemContent[index]['new_cost'],
+                              widget.item[index]['new_cost'],
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 16),
                             ),
                             Text(
-                              itemContent[index]['old_cost'],
+                              widget.item[index]['old_cost'],
                               style: const TextStyle(
                                 color: Color(0xff818082),
                                 decoration: TextDecoration.lineThrough,
@@ -208,11 +203,11 @@ class _DharaOilState extends State<DharaOil> {
                                 color: Color(0xffF8C50F),
                               ),
                               Text(
-                                itemContent[index]['ratings'],
+                                widget.item[index]['ratings'],
                                 style:
                                     const TextStyle(color: Color(0xff101010)),
                               ),
-                              Text(itemContent[index]['reviews'],
+                              Text(widget.item[index]['reviews'],
                                   style: const TextStyle(
                                       color: Color(0xff818082))),
                             ],
@@ -238,7 +233,7 @@ class _DharaOilState extends State<DharaOil> {
                         padding: const EdgeInsets.all(8.0),
                         child: Center(
                             child: Text(
-                          itemContent[index]['quantity'],
+                          widget.item[index]['quantity'],
                           style: const TextStyle(
                               color: Colors.white, fontSize: 16),
                         )),
@@ -331,7 +326,7 @@ class _DharaOilState extends State<DharaOil> {
                   Row(
                     children: [
                       Text(
-                        itemContent[index]['ratings'],
+                        widget.item[index]['ratings'],
                         style: const TextStyle(fontSize: 30),
                       ),
                       const Text(
@@ -346,7 +341,7 @@ class _DharaOilState extends State<DharaOil> {
                               style: TextStyle(fontSize: 15)),
                           Row(
                             children: [
-                              Text(itemContent[index]['reviews'],
+                              Text(widget.item[index]['reviews'],
                                   style: const TextStyle(
                                     fontSize: 15,
                                     color: Color(0xff818082),
@@ -403,11 +398,9 @@ class _DharaOilState extends State<DharaOil> {
         ),
       ),
 
-      bottomNavigationBar: navbar(),
-    );
+      bottomNavigationBar: navbar(),);
   }
-
-  Widget navbar() {
+   Widget navbar() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(15,0,15,10),
       child: GestureDetector(
@@ -416,7 +409,7 @@ class _DharaOilState extends State<DharaOil> {
        Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => CartScreen(itemContent: itemContent),
+              builder: (context) => CartScreen(itemContent: List.empty()),
             ),
           );
     },

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mishop_app/modules/Items_module/screens/Dhara_oil.dart';
-import 'package:mishop_app/modules/Items_module/screens/mountain_dew.dart';
+import 'package:mishop_app/modules/Items_module/screens/items_content.dart';
 import 'package:mishop_app/modules/category_module/screens/category_view_list.dart';
 import 'package:mishop_app/modules/category_module/screens/grocery_view_grid.dart';
 
@@ -24,7 +23,6 @@ class _HomeScreenState extends State<HomeScreen> {
       'ratings': '4.8',
       'reviews': '(230)',
       'isFavorite': false,
-      'paths': DharaOil(),
     },
     {
       'images': 'assets/images/40015868-9_2-mountain-dew-soft-drink 1.png',
@@ -35,7 +33,6 @@ class _HomeScreenState extends State<HomeScreen> {
       'ratings': '4.5',
       'reviews': '(123)',
       'isFavorite': false,
-      'paths': MountainDew(),
     },
     {
       'images': 'assets/images/61pPVRyfmgL 1.jpg',
@@ -46,7 +43,6 @@ class _HomeScreenState extends State<HomeScreen> {
       'ratings': '4.9',
       'reviews': '(123)',
       'isFavorite': false,
-      'paths': MountainDew(),
     }
   ];
 
@@ -256,15 +252,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     shrinkWrap: true,
                     itemCount: gridMap.length,
                     itemBuilder: (context, index) {
+          final gridMap = gridMap[index];
+
+          if (gridMap == null) {
+            return Text('No Product Available');
+          }
+                    
+                     {
+                      
                       return GestureDetector(
                         onTap: () {
-                          final path = gridMap[index]['paths'];
-                          if (path != -1) {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => path),
+                              MaterialPageRoute(builder: (context) => ItemsContent(item: gridMap)),
                             );
-                          }
+                          
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -292,10 +294,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                       child: IconButton(
                                           iconSize: 15,
                                           onPressed: () {
-                                            gridMap[index]['isFavorite'] =! gridMap[index]['isFavorite'];
+                                            gridMap['isFavorite'] =! gridMap['isFavorite'];
                                             setState(() {});
                                           },
-                                          icon:  gridMap[index]['isFavorite'] == true
+                                          icon:  gridMap['isFavorite'] == true
                                               ? Icon(
                                                   Icons.favorite,
                                                   color: Colors.green,
@@ -308,12 +310,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                     )
                                   ],
                                 ),
-                                Image.asset(gridMap[index]['images']),
+                                Image.asset(gridMap['images']),
                                 const SizedBox(height: 4),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Text(gridMap[index]['category'],
+                                    Text(gridMap['category'],
                                         style: const TextStyle(
                                             fontSize: 10,
                                             color:
@@ -324,7 +326,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Text(
-                                      gridMap[index]['title'],
+                                      gridMap['title'],
                                       style: const TextStyle(fontSize: 12),
                                     ),
                                   ],
@@ -333,7 +335,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Text(
-                                      gridMap[index]['subtitle'],
+                                      gridMap['subtitle'],
                                       style: const TextStyle(fontSize: 12),
                                     ),
                                   ],
@@ -342,7 +344,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Text(
-                                        gridMap[index]['cost'],
+                                        gridMap['cost'],
                                         style: const TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.bold),
@@ -354,12 +356,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                     const Icon(Icons.star,
                                         color: Color(0xFFF8C50F)),
                                     Text(
-                                      gridMap[index]['ratings'],
+                                      gridMap['ratings'],
                                       style: const TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    Text(gridMap[index]['reviews'],
+                                    Text(gridMap['reviews'],
                                         style: const TextStyle(
                                             fontSize: 10, color: Colors.grey)),
                                   ],
@@ -369,7 +371,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       );
-                    },
+                    }},
                   )
                 ],
               ),

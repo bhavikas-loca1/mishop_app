@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mishop_app/modules/Items_module/screens/Dhara_oil.dart';
-import 'package:mishop_app/modules/Items_module/screens/mountain_dew.dart';
+import 'package:mishop_app/modules/Items_module/screens/items_content.dart';
 import 'package:mishop_app/modules/category_module/screens/grocery_view_list.dart';
 
 class Grocery extends StatefulWidget {
@@ -22,7 +21,7 @@ class _GroceryState extends State<Grocery> {
     'ratings' : '4.8',
     'reviews' : '(230)',
     'isFavorite': false,
-    'path': DharaOil(), 
+    // 'path': ItemsContent(item: ), 
     
    },
    {
@@ -34,7 +33,7 @@ class _GroceryState extends State<Grocery> {
     'ratings': '4.5',
     'reviews': '(123)',
     'isFavorite':false,
-    'path': MountainDew(),
+    // 'path': MountainDew(),
     
     
    },
@@ -47,7 +46,7 @@ class _GroceryState extends State<Grocery> {
     'ratings': '4.9',
     'reviews': '(123)',
     'isFavorite':false,
-    'path': MountainDew(),
+    // 'path': MountainDew(),
    
    }
   ];
@@ -237,13 +236,13 @@ class _GroceryState extends State<Grocery> {
            // bool isFavorite = gridMap[index]['isFavorite'];
             return GestureDetector(
               onTap: () {
-                          final path = gridMap[index]['path'];
-                          if (path != -1) {
+                          // final path = gridMap[index]['path'];
+                          
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => path),
+                              MaterialPageRoute(builder: (context) => ItemsContent(item: gridMap)),
                             );
-                          }
+                          
                         },
               child: Container(
                 decoration: BoxDecoration(
